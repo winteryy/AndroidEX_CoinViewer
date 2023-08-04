@@ -9,5 +9,4 @@ class NetworkRepository {
 
     suspend fun getCurrentCoinList() = client.getCurrentCoinList()
 
-
 }
