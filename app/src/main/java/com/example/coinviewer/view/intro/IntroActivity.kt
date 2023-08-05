@@ -3,13 +3,11 @@ package com.example.coinviewer.view.intro
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
-import com.example.coinviewer.MainActivity
-import com.example.coinviewer.R
+import com.example.coinviewer.view.main.MainActivity
 import com.example.coinviewer.databinding.ActivityIntroBinding
 import timber.log.Timber
 
