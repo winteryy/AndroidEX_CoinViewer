@@ -6,10 +6,15 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
+import com.example.coinviewer.background.GetCoinPriceRecentContractedWorkManager
 import com.example.coinviewer.view.main.MainActivity
 import com.example.coinviewer.databinding.ActivitySelectBinding
 import com.example.coinviewer.view.adapter.SelectRVAdapter
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 class SelectActivity : AppCompatActivity() {
 
@@ -45,7 +50,26 @@ class SelectActivity : AppCompatActivity() {
             if(it.equals("done")){
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+
+                saveInterestCoinDataPeriodic()
             }
         })
     }
+
+    private fun saveInterestCoinDataPeriodic(){
+
+        val myWork = PeriodicWorkRequest.Builder(
+            GetCoinPriceRecentContractedWorkManager::class.java,
+            15,
+            TimeUnit.MINUTES
+        ).build()
+
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            "GetCoinPriceRecentContractedWorkManager",
+            ExistingPeriodicWorkPolicy.KEEP,
+            myWork
+        )
+
+    }
+
 }

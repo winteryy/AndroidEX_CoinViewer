@@ -3,6 +3,7 @@ package com.example.coinviewer.repository
 import com.example.coinviewer.App
 import com.example.coinviewer.db.CoinPriceDatabase
 import com.example.coinviewer.db.entity.InterestCoinEntity
+import com.example.coinviewer.db.entity.SelectedCoinPriceEntity
 
 class DBRepository {
 
@@ -22,4 +23,13 @@ class DBRepository {
 
     //관심 코인만 가져오기
     fun getAllInterestSelectedCoinData() = db.interestCoinDAO().getSelectedData()
+
+
+    //CoinPrice
+
+    fun getAllCoinPriceData() = db.selectedCoinDAO().getAllData()
+
+    fun insertCoinPriceData(selectedCoinPriceEntity: SelectedCoinPriceEntity) = db.selectedCoinDAO().insert(selectedCoinPriceEntity)
+
+    fun getOneSelectedCoinData(coinName: String) = db.selectedCoinDAO().getOneCoinData(coinName)
 }
